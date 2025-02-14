@@ -1,87 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Frogger Maze Game</title>
-    <style>
-        /* Appearance */
-        body {
-            background-color: #0c4a0c; 
-            overflow: hidden;
-        }
-
-        #game-container {
-            width: 400px;
-            height: 400px;
-            border: 2px solid #000;
-            position: relative;
-            margin: 50px auto;
-            background-color: #f0f0f0;
-        }
-
-        /* Frog appearance */
-        .frog {
-            width: 30px;
-            height: 30px;
-            background-image: url('./redfrog.png'); 
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%;
-            position: absolute;
-            top: 360px;
-            left: 360px;
-        }
-
-        /* Wall */
-        .wall {
-            position: absolute;
-            background-color: #000;
-            width: 10px;
-            height: 10px;
-        }
-
-        #start {
-            position: absolute;
-            top: 360px;
-            left: 360px;
-            width: 30px;
-            height: 30px;
-            border: 2px solid green;
-            border-radius: 5px;
-        }
-
-        #end {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 30px;
-            height: 30px;
-            border: 2px solid green;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div id="game-container">
-        <div class="frog"></div>
-
-        <div id="start"></div>
-        <div id="end"></div>
-
-        <div class="wall" style="top: 100px; left: 0px; width: 260px;"></div>
-        <div class="wall" style="top: 100px; left: 300px; width: 100px;"></div>
-
-        <div class="wall" style="top: 200px; left: 50px; width: 200px;"></div>
-        <div class="wall" style="top: 200px; left: 200px; width: 200px;"></div>
-
-        <div class="wall" style="top: 300px; left: 20px; width: 200px;"></div>
-        <div class="wall" style="top: 300px; left: 300px; width: 100px;"></div>
-
-    </div>
-
-    <script>
         const gameContainer = document.getElementById('game-container');
         const frog = document.querySelector('.frog');
         const gameWidth = gameContainer.offsetWidth;
@@ -150,8 +67,6 @@
             }
             return false;
         }
-    </script>
 
-</body>
 
-</html>
+        //Reference: https://www.the-art-of-web.com/javascript/maze-game/
