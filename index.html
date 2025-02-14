@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Frogger Maze Game</title>
+ 
+</head>
+
+<body>
+
+    <div id="game-container">
+        <div class="frog"></div>
+
+        <div id="start"></div>
+        <div id="end"></div>
+
+        <div class="wall" style="top: 100px; left: 50px; width: 100px;"></div>
+        <div class="wall" style="top: 100px; left: 300px; width: 100px;"></div>
+
+        <div class="wall" style="top: 200px; left: 50px; width: 200px;"></div>
+        <div class="wall" style="top: 200px; left: 200px; width: 200px;"></div>
+
+        <div class="wall" style="top: 300px; left: 50px; width: 200px;"></div>
+        <div class="wall" style="top: 300px; left: 300px; width: 100px;"></div>
+
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const frog = document.querySelector('.frog');
+        const gameWidth = gameContainer.offsetWidth;
+        const gameHeight = gameContainer.offsetHeight;
+        let frogX = 190;
+        let frogY = 380;
+
+        const start = document.getElementById('start');
+        const end = document.getElementById('end');
+
+        // Handle key presses
+        document.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowLeft':
+                    frogX -= 10;
+                    break;
+                case 'ArrowRight':
+                    frogX += 10;
+                    break;
+                case 'ArrowUp':
+                    frogY -= 10;
+                    break;
+                case 'ArrowDown':
+                    frogY += 10;
+                    break;
+            }
+
+            // Keep frog within game boundaries
+            frogX = Math.max(0, Math.min(frogX, gameWidth - frog.offsetWidth));
+            frogY = Math.max(0, Math.min(frogY, gameHeight - frog.offsetHeight));
+
+            // Check for collisions with walls
+            if (checkCollisions()) {
+                // If collision, move frog back
+                switch (event.key) {
+                    case 'ArrowLeft':
+                        frogX += 10;
+                        break;
+                    case 'ArrowRight':
+                        frogX -= 10;
+                        break;
+                    case 'ArrowUp':
+                        frogY += 10;
+                        break;
+                    case 'ArrowDown':
+                        frogY -= 10;
+                        break;
+                }
+            }
+
+            frog.style.left = frogX + 'px';
+            frog.style.top = frogY + 'px';
+
+            // Check if the frog has reached the end
+            if (
+                frogX >= end.offsetLeft &&
+                frogX + frog.offsetWidth <= end.offsetLeft + end.offsetWidth &&
+                frogY >= end.offsetTop &&
+                frogY + frog.offsetHeight <= end.offsetTop + end.offsetHeight
+            ) {
+                alert('You Win!');
+            }
+        });
+
+        function checkCollisions() {
+            const frogRect = frog.getBoundingClientRect();
+            const walls = document.querySelectorAll('.wall');
+            for (const wall of walls) {
+                const wallRect = wall.getBoundingClientRect();
+                if (
+                    frogRect.left < wallRect.right &&
+                    frogRect.right > wallRect.left &&
+                    frogRect.top < wallRect.bottom &&
+                    frogRect.bottom > wallRect.top
+                ) {
+                    return true; // Collision detected
+                }
+            }
+            return false;
+        }
+    </script>
+
+</body>
+
+</html>
